@@ -36,17 +36,21 @@ class Grammar:
 
 ### FiniteAutomaton Class:
 
-Represents a finite automaton with states, alphabet, transitions, initial state, and final states. It provides methods to convert from a grammar and check strings.
+Represents a finite automaton with states, alphabet, transitions, initial state, and final states. It provides methods to convert from a grammar and check strings. // The FiniteAutomaton class now accepts a grammar as an optional argument in its constructor. If a grammar is provided, it automatically converts it to an automaton.
 
 ```python
 class FiniteAutomaton:
-    def __init__(self):
+    def __init__(self, grammar=None):
 
         self.states = set()
         self.alphabet = set()
         self.transitions = {}
         self.initial_state = None
         self.final_states = set()
+
+        # If a grammar is provided, convert it to an automaton
+        if grammar:
+            self.convert_from_grammar(grammar)
 
     def convert_from_grammar(self, grammar):
 
@@ -70,16 +74,18 @@ class FiniteAutomaton:
 
         current_state = self.initial_state
 
+        # Iterate through characters in the input string
         for char in input_string:
             # Check if the current state and input character combination exists in transitions
             if (current_state, char) in self.transitions:
                 # Update current state to the next state based on the transition
                 current_state = self.transitions[(current_state, char)]
             else:
-                # If there is no transition for the current state and character, return False
+
                 return False
 
         return True
+
 ```
 
 ### Main Class:
@@ -87,9 +93,15 @@ class FiniteAutomaton:
 Contains methods to generate valid strings based on the grammar and to run the program.
 
 ```python
+import random
+from Grammar import Grammar
+from FiniteAutomaton import FiniteAutomaton
+
+
 class Main:
     @staticmethod
     def generate_valid_strings(grammar, num_strings):
+
         valid_strings_with_transitions = []
 
         for _ in range(num_strings):
@@ -118,8 +130,7 @@ class Main:
     def run():
 
         grammar = Grammar()
-        finite_automaton = FiniteAutomaton()
-        finite_automaton.convert_from_grammar(grammar)
+        finite_automaton = FiniteAutomaton(grammar)
 
         print("Generated strings:")
         valid_strings_with_transitions = Main.generate_valid_strings(grammar, 5)
@@ -135,6 +146,7 @@ class Main:
         input_strings = ["ddc", "dabadd", "dd", "dcab", "dcad"]
         print("\nChecking if input strings are accepted by the Finite Automaton:")
         for string in input_strings:
+
             if finite_automaton.check_string(string):
                 print(f"'{string}' is accepted by the Finite Automaton.")
             else:
@@ -143,6 +155,7 @@ class Main:
 
 if __name__ == "__main__":
     Main.run()
+
 ```
 
 ### Program Execution:
@@ -152,6 +165,10 @@ The `run()` method in the `Main` class initializes a grammar, converts it to a f
 ## Conclusions / Screenshots / Results
 
 The program successfully converts the grammar to a finite automaton and demonstrates the recognition of valid strings by the automaton.
+
+Here are three examples of generated strings and the validation of the strings by the automaton:
+
+
 
 ## References
 
