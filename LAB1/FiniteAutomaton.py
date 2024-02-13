@@ -29,4 +29,4 @@ class FiniteAutomaton:
             else:
                 return False
 
-        return current_state in self.final_states
+        return True
