@@ -1,7 +1,7 @@
 # Grammar to Finite Automaton Conversion
 
 ### Course: Formal Languages & Finite Automata
-### Author: AI ChatGPT
+### Author: Parfene Daniel FAF-222
 
 ----
 
