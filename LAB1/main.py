@@ -6,6 +6,7 @@ from FiniteAutomaton import FiniteAutomaton
 class Main:
     @staticmethod
     def generate_valid_strings(grammar, num_strings):
+
         valid_strings_with_transitions = []
 
         for _ in range(num_strings):
@@ -34,8 +35,7 @@ class Main:
     def run():
 
         grammar = Grammar()
-        finite_automaton = FiniteAutomaton()
-        finite_automaton.convert_from_grammar(grammar)
+        finite_automaton = FiniteAutomaton(grammar)
 
         print("Generated strings:")
         valid_strings_with_transitions = Main.generate_valid_strings(grammar, 5)
@@ -51,6 +51,7 @@ class Main:
         input_strings = ["ddc", "dabadd", "dd", "dcab", "dcad"]
         print("\nChecking if input strings are accepted by the Finite Automaton:")
         for string in input_strings:
+
             if finite_automaton.check_string(string):
                 print(f"'{string}' is accepted by the Finite Automaton.")
             else:
