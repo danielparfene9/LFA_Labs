@@ -7,26 +7,32 @@ class Main:
     @staticmethod
     def generate_valid_strings(grammar, num_strings):
         valid_strings_with_transitions = []
+
         for _ in range(num_strings):
             string = ''
             transitions = [('S', 'S')]
             stack = ['S']
 
+            # Depth-first traversal to generate strings based on grammar productions
             while stack:
                 current_symbol = stack.pop()
 
+                # If the current symbol is a terminal, add it to the string
                 if current_symbol in grammar.VT:
                     string += current_symbol
                 else:
+                    # If the current symbol is non-terminal, select a random production and expand the stack
                     production = random.choice(grammar.P[current_symbol])
-                    stack.extend(reversed(production))
-                    transitions.append((current_symbol, production))
+                    stack.extend(reversed(production))  # Push the production onto the stack
+                    transitions.append((current_symbol, production))  # Record the transition
 
+            # Append generated string and transitions to the list
             valid_strings_with_transitions.append((string, transitions))
         return valid_strings_with_transitions
 
     @staticmethod
     def run():
+
         grammar = Grammar()
         finite_automaton = FiniteAutomaton()
         finite_automaton.convert_from_grammar(grammar)
