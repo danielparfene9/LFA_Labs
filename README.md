@@ -171,11 +171,11 @@ Here are three examples of generated strings and the validation of the strings b
 
 ```python
 Generated strings:
-1. S -> S -> dA -> d -> dd
-2. S -> S -> dA -> aB -> bC -> aS -> dA -> aB -> bC -> cA -> aB -> bC -> aS -> dA -> aB -> bC -> aS -> dA -> aB -> bC -> cA -> d -> dabadabcabadabadabcd
-3. S -> S -> dA -> d -> dd
-4. S -> S -> dA -> d -> dd
-5. S -> S -> dA -> aB -> bC -> cA -> aB -> bC -> cA -> aB -> bC -> cA -> d -> dabcabcabcd
+1. S -> dA -> d -> dd
+2. S -> dA -> aB -> bC -> aS -> dA -> aB -> bC -> cA -> aB -> bC -> aS -> dA -> aB -> bC -> aS -> dA -> aB -> bC -> cA -> d -> dabadabcabadabadabcd
+3. S -> dA -> d -> dd
+4. S -> dA -> d -> dd
+5. S -> dA -> aB -> bC -> cA -> aB -> bC -> cA -> aB -> bC -> cA -> d -> dabcabcabcd
 
 Checking if input strings are accepted by the Finite Automaton:
 'ddc' is not accepted by the Finite Automaton.
@@ -186,11 +186,11 @@ Checking if input strings are accepted by the Finite Automaton:
 ```
 ```python
 Generated strings:
-1. S -> S -> dA -> d -> dd
-2. S -> S -> dA -> aB -> bC -> cA -> d -> dabcd
-3. S -> S -> dA -> d -> dd
-4. S -> S -> dA -> aB -> bC -> cA -> aB -> bC -> aS -> dA -> aB -> bC -> aS -> dA -> d -> dabcabadabadd
-5. S -> S -> dA -> aB -> bC -> cA -> d -> dabcd
+1. S -> dA -> d -> dd
+2. S -> dA -> aB -> bC -> cA -> d -> dabcd
+3. S -> dA -> d -> dd
+4. S -> dA -> aB -> bC -> cA -> aB -> bC -> aS -> dA -> aB -> bC -> aS -> dA -> d -> dabcabadabadd
+5. S -> dA -> aB -> bC -> cA -> d -> dabcd
 
 Checking if input strings are accepted by the Finite Automaton:
 'ddc' is not accepted by the Finite Automaton.
@@ -201,11 +201,11 @@ Checking if input strings are accepted by the Finite Automaton:
 ```
 ```python
 Generated strings:
-1. S -> S -> dA -> aB -> bC -> cA -> aB -> bC -> aS -> dA -> d -> dabcabadd
-2. S -> S -> dA -> d -> dd
-3. S -> S -> dA -> aB -> bC -> cA -> d -> dabcd
-4. S -> S -> dA -> aB -> bC -> aS -> dA -> d -> dabadd
-5. S -> S -> dA -> aB -> bC -> aS -> dA -> aB -> bC -> cA -> aB -> bC -> cA -> d -> dabadabcabcd
+1. S -> dA -> aB -> bC -> cA -> aB -> bC -> aS -> dA -> d -> dabcabadd
+2. S -> dA -> d -> dd
+3. S -> dA -> aB -> bC -> cA -> d -> dabcd
+4. S -> dA -> aB -> bC -> aS -> dA -> d -> dabadd
+5. S -> dA -> aB -> bC -> aS -> dA -> aB -> bC -> cA -> aB -> bC -> cA -> d -> dabadabcabcd
 
 Checking if input strings are accepted by the Finite Automaton:
 'dabcd' is accepted by the Finite Automaton.
