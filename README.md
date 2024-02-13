@@ -1,7 +1,8 @@
-# Grammar to Finite Automaton Conversion
+# Grammar to Finite Automaton Conversion and String Generation
 
 ### Course: Formal Languages & Finite Automata
-### Author: Parfene Daniel FAF-222
+### Author: Parfene Daniel
+### Group: FAF-222
 
 ----
 
