@@ -48,7 +48,7 @@ class Main:
                     print(f"-> {transition[1]}", end=' ')
             print(f"-> {string}")
 
-        input_strings = ["ddc", "dabadd", "dd", "dcab", "dcad"]
+        input_strings = ["dabcd", "ddaaa", "dabcabcabcd", "dabadabcabadd", "dcadca"]
         print("\nChecking if input strings are accepted by the Finite Automaton:")
         for string in input_strings:
 
