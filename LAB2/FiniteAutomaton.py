@@ -6,8 +6,7 @@ class FiniteAutomaton:
         self.Q = {'q0', 'q1', 'q2', 'q3'}
         self.sigma = {'a', 'b', 'c'}
         self.delta = {
-            ('q0', 'a'): 'q0',
-            ('q0', 'a'): 'q1',
+            ('q0', 'a'): ['q0', 'q1'],
             ('q2', 'a'): 'q2',
             ('q1', 'b'): 'q2',
             ('q2', 'c'): 'q3',
@@ -20,28 +19,28 @@ class FiniteAutomaton:
 
         start_symbol = self.q0
 
-        non_terminals = self.Q
+        VN = self.Q
 
-        terminals = self.sigma
+        VT = self.sigma
 
-        production_rules = []
+        P = []
         for q in self.Q:
             for a in self.sigma:
                 if (q, a) in self.delta:
                     to_state = self.delta[(q, a)]
                     if isinstance(to_state, list):
                         for state in to_state:
-                            production_rules.append(f"{q} -> {a}{state}")
+                            P.append(f"{q} -> {a}{state}")
                     else:
-                        production_rules.append(f"{q} -> {a}{to_state}")
+                        P.append(f"{q} -> {a}{to_state}")
             if q in self.F:
-                production_rules.append(f"{q} -> ε")
+                P.append(f"{q} -> ε")
 
         print(f"Start symbol: {start_symbol}")
-        print(f"Non-terminals: {', '.join(non_terminals)}")
-        print(f"Terminals: {', '.join(terminals)}")
+        print(f"Non-terminals: {', '.join(VN)}")
+        print(f"Terminals: {', '.join(VT)}")
         print("Production rules:")
-        for rule in production_rules:
+        for rule in P:
             print(rule)
 
     def is_deterministic(self):
@@ -51,18 +50,22 @@ class FiniteAutomaton:
                 return False
         return True
 
-    def visualize_automaton(self, filename='automaton'):
-        dot = graphviz.Digraph()
+    def visualize_automaton(self):
+        dot = graphviz.Digraph(comment='Finite Automaton')
 
         for state in self.Q:
             if state in self.F:
                 dot.node(state, shape='doublecircle')
             else:
-                dot.node(state)
+                dot.node(state, shape='circle')
 
-        for (from_state, symbol), to_state in self.delta.items():
-            dot.edge(from_state, to_state, label=symbol)
+        for transition, to_state in self.delta.items():
+            from_state, symbol = transition
+            if isinstance(to_state, list):
+                for state in to_state:
+                    dot.edge(from_state, state, label=symbol)
+            else:
+                dot.edge(from_state, to_state, label=symbol)
 
-        dot.render(filename, format='png', cleanup=True)
-
-        print(f"Finite Automaton visualized. Image saved as '{filename}.png'")
+        dot.render('finite_automaton', format='png', cleanup=True)
+        print("Automaton visualization saved as 'finite_automaton.png'")
