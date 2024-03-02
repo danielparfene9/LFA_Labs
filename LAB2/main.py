@@ -14,10 +14,13 @@ class Main:
         fa = FiniteAutomaton()
 
         nfa_transition_table = fa.nfa_to_transition_table()
+
         print("NFA Transition Table:")
         for key, value in nfa_transition_table.items():
             if value != set():
                 print(key, '->', value)
+
+        print("NFA to Regular Grammar:")
 
         fa.to_regular_grammar()
 
