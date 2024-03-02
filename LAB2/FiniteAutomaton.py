@@ -50,6 +50,23 @@ class FiniteAutomaton:
                 return False
         return True
 
+    def nfa_to_transition_table(self):
+        transition_table = {}
+
+        for state in self.Q:
+            for symbol in self.sigma:
+                transition_table[(state, symbol)] = set()
+
+        for key, value in self.delta.items():
+            state, symbol = key
+            if isinstance(value, list):
+                for next_state in value:
+                    transition_table[(state, symbol)].add(next_state)
+            else:
+                transition_table[(state, symbol)].add(value)
+
+        return transition_table
+
     def visualize_automaton(self):
         dot = graphviz.Digraph(comment='Finite Automaton')
 
