@@ -20,6 +20,12 @@ class Main:
             if value != set():
                 print(key, '->', value)
 
+        dfa_start_state = fa.get_dfa_start_state()
+        print("DFA_Start_State:", dfa_start_state, "\n")
+
+        print("DFA_Transition_Table: \n")
+        fa.print_dfa_transition_table()
+
         print("NFA to Regular Grammar:")
 
         fa.to_regular_grammar()
@@ -30,6 +36,7 @@ class Main:
             print("The Finite Automaton is non-deterministic.")
 
         fa.visualize_automaton()
+        fa.visualize_dfa()
 
 
 if __name__ == "__main__":

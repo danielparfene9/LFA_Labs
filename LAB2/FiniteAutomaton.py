@@ -1,4 +1,5 @@
 import graphviz
+from graphviz import Digraph
 
 
 class FiniteAutomaton:
@@ -67,6 +68,47 @@ class FiniteAutomaton:
 
         return transition_table
 
+    def get_dfa_start_state(self):
+        dfa_start_state = set()
+
+        for (state, symbol), next_state in self.delta.items():
+            if isinstance(next_state, list):
+                dfa_start_state.update(next_state)
+
+        return dfa_start_state
+
+    def dfa_transition_table(self):
+        nfa_transition_table = self.nfa_to_transition_table()
+        dfa_start_state = self.get_dfa_start_state()
+
+        dfa_states = [dfa_start_state]
+        unmarked_states = [dfa_start_state]
+        dfa_transition = {}
+
+        while unmarked_states:
+            current_state = unmarked_states.pop(0)
+
+            for symbol in self.sigma:
+                next_state = set()
+
+                for state in current_state:
+                    next_state.update(nfa_transition_table.get((state, symbol), set()))
+
+                dfa_transition[(tuple(current_state), symbol)] = tuple(next_state)
+
+                if tuple(next_state) not in dfa_states:
+                    dfa_states.append(tuple(next_state))
+                    unmarked_states.append(tuple(next_state))
+
+        return dfa_transition
+
+    def print_dfa_transition_table(self):
+        dfa_transition_table = self.dfa_transition_table()
+
+        for key, value in sorted(dfa_transition_table.items()):
+            if value != ():
+                print(f"{key} -> {value}")
+
     def visualize_automaton(self):
         dot = graphviz.Digraph(comment='Finite Automaton')
 
@@ -86,3 +128,15 @@ class FiniteAutomaton:
 
         dot.render('finite_automaton', format='png', cleanup=True)
         print("Automaton visualization saved as 'finite_automaton.png'")
+
+    def visualize_dfa(self):
+        dot = graphviz.Digraph(comment='Deterministic Finite Automaton')
+
+        dfa_transition_table = self.dfa_transition_table()
+
+        for transition, to_state in dfa_transition_table.items():
+            from_state, symbol = transition
+            dot.edge(str(from_state), str(to_state), label=symbol)
+
+        dot.render('dfa_automaton', format='png', cleanup=True)
+        print("DFA visualization saved as 'dfa_automaton.png'")
