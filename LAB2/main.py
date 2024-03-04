@@ -7,6 +7,8 @@ class Main:
     def run():
 
         grammar = Grammar()
+
+        print("The Grammar is: ")
         grammar.classify_grammar()
 
         print("///////////////////////////////////////////////////////////////////////////////")
@@ -15,16 +17,20 @@ class Main:
 
         nfa_transition_table = fa.nfa_to_transition_table()
 
-        print("NFA Transition Table:")
+        print("NFA Transition Table: \n")
         for key, value in nfa_transition_table.items():
             if value != set():
                 print(key, '->', value)
 
         dfa_start_state = fa.get_dfa_start_state()
+
+        print("/////////////////////////////////////////////////////////////////////////////// \n")
         print("DFA_Start_State:", dfa_start_state, "\n")
 
         print("DFA_Transition_Table: \n")
         fa.print_dfa_transition_table()
+
+        print("/////////////////////////////////////////////////////////////////////////////// \n")
 
         print("NFA to Regular Grammar:")
 
